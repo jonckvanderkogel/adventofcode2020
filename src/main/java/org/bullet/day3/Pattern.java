@@ -33,7 +33,7 @@ public class Pattern {
 
     private boolean[] convertCharArrayToIntArray(char[] charArray) {
         boolean[] booleans = new boolean[charArray.length];
-        for (int i=0; i<charArray.length; i++) {
+        for (int i = 0; i < charArray.length; i++) {
             booleans[i] = charArray[i] == '#';
         }
 

@@ -23,6 +23,6 @@ public class TreeFileProcessor {
         long treeCountDown2Right1 = TreeCounter.countTreesOnRoute(pattern, 2, 1);
         System.out.println(String.format("Down 2, right 1: %d", treeCountDown2Right1));
 
-        System.out.println(String.format("Final score: %d", treeCountDown1Right1*treeCountDown1Right3*treeCountDown1Right5*treeCountDown1Right7*treeCountDown2Right1));
+        System.out.println(String.format("Final score: %d", treeCountDown1Right1 * treeCountDown1Right3 * treeCountDown1Right5 * treeCountDown1Right7 * treeCountDown2Right1));
     }
 }

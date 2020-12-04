@@ -27,6 +27,6 @@ public class TreeCounterTest {
         long treeCountDown2Right1 = TreeCounter.countTreesOnRoute(pattern, 2, 1);
         assertEquals(2, treeCountDown2Right1);
 
-        assertEquals(336, treeCountDown1Right1*treeCountDown1Right3*treeCountDown1Right5*treeCountDown1Right7*treeCountDown2Right1);
+        assertEquals(336, treeCountDown1Right1 * treeCountDown1Right3 * treeCountDown1Right5 * treeCountDown1Right7 * treeCountDown2Right1);
     }
 }
