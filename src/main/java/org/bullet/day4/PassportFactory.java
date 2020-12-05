@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class PassportFactory {
-    public static Passport createPassport(List<Tuple2<String,String>> tuples) {
+    public static Passport createPassport(List<Tuple2<String,Object>> tuples) {
         Passport passport = new Passport();
 
         tuples.stream()
@@ -29,7 +29,7 @@ public class PassportFactory {
         }
     }
 
-    private static void setValueToField(Passport passport, Field field, String value) {
+    private static void setValueToField(Passport passport, Field field, Object value) {
         try {
             field.set(passport, value);
         } catch (IllegalAccessException e) {
