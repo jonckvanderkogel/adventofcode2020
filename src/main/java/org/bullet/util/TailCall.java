@@ -1,4 +1,4 @@
-package org.bullet.day5;
+package org.bullet.util;
 
 import java.util.stream.Stream;
 

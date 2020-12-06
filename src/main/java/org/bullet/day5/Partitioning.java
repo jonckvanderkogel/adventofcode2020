@@ -1,6 +1,8 @@
 package org.bullet.day5;
 
-import static org.bullet.day5.TailCalls.done;
+import org.bullet.util.TailCall;
+
+import static org.bullet.util.TailCalls.done;
 
 public class Partitioning {
     public static int determineSeatNumber(String partitioningString) {

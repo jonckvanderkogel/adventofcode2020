@@ -1,4 +1,4 @@
-package org.bullet.day5;
+package org.bullet.util;
 
 public class TailCalls {
     public static <T> TailCall<T> done(final T value) {

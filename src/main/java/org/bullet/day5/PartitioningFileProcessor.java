@@ -2,7 +2,6 @@ package org.bullet.day5;
 
 import io.vavr.Tuple2;
 import io.vavr.collection.List;
-import io.vavr.collection.Stream;
 import org.bullet.util.FileProcessing;
 
 import java.io.IOException;
