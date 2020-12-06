@@ -1,4 +1,4 @@
-package org.bullet.day5;
+package org.bullet.util;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +8,6 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @Getter
 public class Range {
-    private final int lowerBoundary;
-    private final int upperBoundary;
+    private final int lowerBound;
+    private final int upperBound;
 }
