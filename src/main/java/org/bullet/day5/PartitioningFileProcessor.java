@@ -4,14 +4,13 @@ import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import org.bullet.util.FileProcessing;
 
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PartitioningFileProcessor {
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) {
         int max = FileProcessing.streamLinesFromFile("inputDay5.txt")
                 .map(Partitioning::determineSeatNumber)
                 .mapToInt(i -> i)

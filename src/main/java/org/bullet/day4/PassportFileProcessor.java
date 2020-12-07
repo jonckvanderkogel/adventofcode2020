@@ -1,10 +1,9 @@
 package org.bullet.day4;
 
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class PassportFileProcessor {
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) {
         var passportData = PassportFileParser.parseFile("inputDay4.txt");
 
         var passports = passportData

@@ -1,9 +1,7 @@
 package org.bullet.day4;
 
 import io.vavr.Tuple2;
-import org.bullet.util.FileProcessing;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +13,7 @@ import static org.bullet.util.FileProcessing.parseLinesFromFile;
 public class PassportFileParser {
     private static Pattern heightPattern = Pattern.compile("([0-9]*)([a-z]*)");
 
-    public static List<List<Tuple2<String, Object>>> parseFile(String fileName) throws IOException {
+    public static List<List<Tuple2<String, Object>>> parseFile(String fileName) {
         List<String> lines = parseLinesFromFile(fileName);
 
         return splitFieldsIntoTuples(combineLines(lines));

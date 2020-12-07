@@ -5,7 +5,7 @@ import org.bullet.util.FileProcessing;
 import java.io.IOException;
 
 public class TreeFileProcessor {
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) {
         Pattern pattern = new Pattern(FileProcessing.parseLinesFromFile("inputDay3.txt"));
 
         long treeCountDown1Right1 = TreeCounter.countTreesOnRoute(pattern, 1, 1);

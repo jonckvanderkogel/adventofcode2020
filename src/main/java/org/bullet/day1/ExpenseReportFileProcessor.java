@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.bullet.util.FileProcessing.streamLinesFromFile;
 
 public class ExpenseReportFileProcessor {
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) {
         List<Integer> numbers = streamLinesFromFile("inputDay1.txt")
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

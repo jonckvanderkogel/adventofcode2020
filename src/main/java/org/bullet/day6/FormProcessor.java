@@ -2,11 +2,10 @@ package org.bullet.day6;
 
 import org.bullet.util.FileProcessing;
 
-import java.io.IOException;
 import java.util.List;
 
 public class FormProcessor {
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) {
         List<String> lines = FileProcessing.parseLinesFromFile("inputDay6.txt");
         List<List<String>> combinedLines = FileProcessing.combineLines(lines);
 

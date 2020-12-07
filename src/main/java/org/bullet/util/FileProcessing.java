@@ -10,12 +10,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FileProcessing {
-    public static Stream<String> streamLinesFromFile(String fileName) throws IOException {
+    public static Stream<String> streamLinesFromFile(String fileName) {
         String filePath = FileProcessing.class.getClassLoader().getResource(fileName).getPath();
-        return Files.lines(Paths.get(filePath));
+        try {
+            Stream<String> stream = Files.lines(Paths.get(filePath));
+            return stream;
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
-    public static List<String> parseLinesFromFile(String fileName) throws IOException {
+    public static List<String> parseLinesFromFile(String fileName) {
         return streamLinesFromFile(fileName)
                 .collect(Collectors.toList());
     }
