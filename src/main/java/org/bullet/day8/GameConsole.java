@@ -24,7 +24,7 @@ public class GameConsole {
     }
 
     public Tuple2<Integer,Boolean> correctProgram(List<Instruction> instructions) {
-        List<Integer> jmpNopPositions = gatherPostions(instructions);
+        List<Integer> jmpNopPositions = gatherJmpNopPostions(instructions);
         return testVariation(instructions, jmpNopPositions).invoke();
     }
 
@@ -47,7 +47,7 @@ public class GameConsole {
         instructions.set(swap, instruction.getOperation().equals(JMP) ? new Instruction(NOP, instruction.getParameter()) : new Instruction(JMP, instruction.getParameter()));
     }
 
-    private  List<Integer> gatherPostions(List<Instruction> instructions) {
+    private  List<Integer> gatherJmpNopPostions(List<Instruction> instructions) {
         return IntStream
                 .range(0, instructions.size())
                 .filter(i -> {
