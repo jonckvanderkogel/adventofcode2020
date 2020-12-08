@@ -13,7 +13,7 @@ public class Height {
     private final Integer measurement;
 
     @NotNull
-    private final UNIT unit;
+    private final Height.Unit unit;
 
     // hgt (Height) - a number followed by either cm or in:
     // If cm, the number must be at least 150 and at most 193.
@@ -27,10 +27,10 @@ public class Height {
         };
     }
 
-    public enum UNIT {
+    public enum Unit {
         CM, IN, INVALID;
 
-        public static UNIT parseUnit(String unitString) {
+        public static Unit parseUnit(String unitString) {
             return switch(unitString.toLowerCase()) {
                 case "cm" -> CM;
                 case "in" -> IN;

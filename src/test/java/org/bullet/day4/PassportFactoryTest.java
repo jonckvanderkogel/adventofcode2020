@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.bullet.day4.EyeColor.COLOR.*;
-import static org.bullet.day4.Height.UNIT.*;
+import static org.bullet.day4.EyeColor.Color.*;
+import static org.bullet.day4.Height.Unit.*;
 import static org.bullet.day4.PassportFactory.createPassport;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

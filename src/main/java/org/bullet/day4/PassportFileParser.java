@@ -11,7 +11,7 @@ import static org.bullet.util.FileProcessing.combineLines;
 import static org.bullet.util.FileProcessing.parseLinesFromFile;
 
 public class PassportFileParser {
-    private static Pattern heightPattern = Pattern.compile("([0-9]*)([a-z]*)");
+    private static Pattern HEIGHT_PATTERN = Pattern.compile("([0-9]*)([a-z]*)");
 
     public static List<List<Tuple2<String, Object>>> parseFile(String fileName) {
         List<String> lines = parseLinesFromFile(fileName);
@@ -56,10 +56,10 @@ public class PassportFileParser {
     }
 
     private static Height parseHeight(String heightString) {
-        Matcher m = heightPattern.matcher(heightString);
+        Matcher m = HEIGHT_PATTERN.matcher(heightString);
         if (m.find()) {
             Integer measurement = Integer.parseInt(m.group(1));
-            Height.UNIT unit = Height.UNIT.parseUnit(m.group(2).toUpperCase());
+            Height.Unit unit = Height.Unit.parseUnit(m.group(2).toUpperCase());
 
             return new Height(measurement, unit);
         } else {
@@ -68,6 +68,6 @@ public class PassportFileParser {
     }
 
     private static EyeColor parseEyeColor(String eyeColorString) {
-        return new EyeColor(EyeColor.COLOR.parseColor(eyeColorString));
+        return new EyeColor(EyeColor.Color.parseColor(eyeColorString));
     }
 }

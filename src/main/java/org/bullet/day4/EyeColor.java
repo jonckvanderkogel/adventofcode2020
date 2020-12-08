@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @RequiredArgsConstructor
 public class EyeColor {
     @NotNull
-    private final COLOR color;
+    private final EyeColor.Color color;
 
     @AssertTrue
     private boolean isColorOk() {
@@ -19,10 +19,10 @@ public class EyeColor {
         };
     }
 
-    public enum COLOR {
+    public enum Color {
         AMB,BLU,BRN,GRY,GRN,HZL,OTH,INVALID;
 
-        public static EyeColor.COLOR parseColor(String colorString) {
+        public static Color parseColor(String colorString) {
             return switch(colorString.toLowerCase()) {
                 case "amb" -> AMB;
                 case "blu" -> BLU;

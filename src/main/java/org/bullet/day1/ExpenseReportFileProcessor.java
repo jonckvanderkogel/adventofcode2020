@@ -3,7 +3,6 @@ package org.bullet.day1;
 import io.vavr.Tuple2;
 import io.vavr.Tuple3;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 

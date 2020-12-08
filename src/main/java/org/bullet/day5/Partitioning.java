@@ -23,7 +23,7 @@ public class Partitioning {
             }
             return done(range.getLowerBound());
         } else {
-            SECTION section = SECTION.parseSection(encodedPartitioning.substring(0, 1));
+            Section section = Section.parseSection(encodedPartitioning.substring(0, 1));
             String tail = encodedPartitioning.substring(1);
 
             return switch(section) {
@@ -35,10 +35,10 @@ public class Partitioning {
     }
 
     // F means "front", B means "back", L means "left", and R means "right"
-    private enum SECTION {
+    private enum Section {
         FRONT, BACK, LEFT, RIGHT, INVALID;
 
-        public static SECTION parseSection(String sectionString) {
+        public static Section parseSection(String sectionString) {
             return switch(sectionString.toUpperCase()) {
                 case "F" -> FRONT;
                 case "B" -> BACK;

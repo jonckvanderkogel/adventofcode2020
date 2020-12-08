@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class BagFileParser {
-    private static Pattern keyPattern = Pattern.compile("([a-z]* [a-z]*)(?: bags)");
-    private static Pattern capacityPattern = Pattern.compile("([0-9]*) ([a-z]* [a-z]*)");
+    private static Pattern KEY_PATTERN = Pattern.compile("([a-z]* [a-z]*)(?: bags)");
+    private static Pattern CAPACITY_PATTERN = Pattern.compile("([0-9]*) ([a-z]* [a-z]*)");
 
     public static void main(String... args) {
         BagFileParser bagFileParser = new BagFileParser();
@@ -40,8 +40,8 @@ public class BagFileParser {
 
     private Tuple2<String, List<Capacity>> parseLine(String line) {
         String[] bags = line.split(" contain ");
-        Matcher keyMatcher = keyPattern.matcher(bags[0]);
-        Matcher capacityMatcher = capacityPattern.matcher(bags[1]);
+        Matcher keyMatcher = KEY_PATTERN.matcher(bags[0]);
+        Matcher capacityMatcher = CAPACITY_PATTERN.matcher(bags[1]);
         if (keyMatcher.find()) {
             String keyColor = keyMatcher.group(1);
             List<Capacity> capacityList = new ArrayList<>();
