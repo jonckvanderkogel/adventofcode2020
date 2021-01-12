@@ -3,13 +3,11 @@ package org.bullet.day3;
 import org.bullet.util.FileProcessing;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TreeCounterTest {
     @Test
-    public void testTreeCounter() throws IOException {
+    public void testTreeCounter() {
         Pattern pattern = new Pattern(FileProcessing.parseLinesFromFile("testFileDay3Part1.txt"));
 
         long treeCountDown1Right1 = TreeCounter.countTreesOnRoute(pattern, 1, 1);

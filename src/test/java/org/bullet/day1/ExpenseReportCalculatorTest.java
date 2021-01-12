@@ -3,7 +3,6 @@ package org.bullet.day1;
 import io.vavr.Tuple2;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExpenseReportCalculatorTest {
     @Test
-    public void shouldFindPairThatAddsUpTo2020() throws IOException {
+    public void shouldFindPairThatAddsUpTo2020() {
         List<Integer> numbers = streamLinesFromFile("testFileDay1Part1.txt")
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());

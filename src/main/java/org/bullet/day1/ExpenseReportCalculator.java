@@ -6,6 +6,7 @@ import org.bullet.util.Range;
 import org.bullet.util.TailCall;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.bullet.util.TailCalls.done;
@@ -21,19 +22,18 @@ public class ExpenseReportCalculator {
         return findPair(numbersSorted.get(0), targetValue, new Range(1, numbersSorted.size() - 1), numbersSorted).invoke();
     }
 
-    // TODO: think about how to make this one recursive as well
-    public static Tuple3<Integer, Integer, Integer> findTripleFromList(List<Integer> numbers, Integer targetValue) {
-        for (Integer n1 : numbers) {
-            for (Integer n2 : numbers) {
-                for (Integer n3 : numbers) {
-                    if (n1 + n2 + n3 == targetValue) {
-                        return new Tuple3<>(n1, n2, n3);
-                    }
-                }
-            }
-        }
-
-        throw new RuntimeException("Not possible");
+    public static Optional<Tuple3<Integer, Integer, Integer>> findTripleFromList(List<Integer> numbers, Integer targetValue) {
+        return numbers
+                .stream()
+                .flatMap(n1 -> numbers
+                        .stream()
+                        .flatMap(n2 -> numbers
+                                .stream()
+                                .filter(n3 -> n1 + n2 + n3 == targetValue)
+                                .map(n3 -> new Tuple3<>(n1, n2, n3))
+                        )
+                )
+                .findFirst();
     }
 
     private static TailCall<Tuple2<Integer, Integer>> findPair(final Integer baseNumber, final Integer targetValue, final Range range, final List<Integer> numbers) {

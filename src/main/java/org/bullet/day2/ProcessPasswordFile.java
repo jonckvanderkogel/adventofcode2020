@@ -1,7 +1,5 @@
 package org.bullet.day2;
 
-import java.io.IOException;
-
 import static org.bullet.util.FileProcessing.streamLinesFromFile;
 
 public class ProcessPasswordFile {

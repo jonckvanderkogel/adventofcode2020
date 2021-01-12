@@ -9,6 +9,8 @@ public class Day9 {
         Long firstInvalidNumber = processor.firstInvalidNumber(numbers, 25);
         System.out.println(String.format("Part 1: %d", firstInvalidNumber));
 
-        System.out.println(String.format("Part 2: %s", processor.addSmallestAndLargest(numbers, processor.findRange(numbers, firstInvalidNumber))));
+        processor
+                .addSmallestAndLargest(numbers, processor.findRange(numbers, firstInvalidNumber))
+                .ifPresent(v -> System.out.println(String.format("Part 2: %s", v)));
     }
 }

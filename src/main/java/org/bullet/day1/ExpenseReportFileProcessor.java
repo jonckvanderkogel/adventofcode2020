@@ -18,9 +18,11 @@ public class ExpenseReportFileProcessor {
         System.out.println(tuple);
         System.out.println(String.format("Answer to part1: %d", tuple._1() * tuple._2()));
 
-        Tuple3<Integer, Integer, Integer> triple = ExpenseReportCalculator.findTripleFromList(numbers, 2020);
-        System.out.println(triple);
-        long multipliedTriple = Long.valueOf(triple._1()) * Long.valueOf(triple._2()) * Long.valueOf(triple._3());
-        System.out.println(String.format("Answer to part2: %d", multipliedTriple));
+        ExpenseReportCalculator.findTripleFromList(numbers, 2020)
+                .ifPresent(v -> {
+                    System.out.println(v);
+                    long multipliedTriple = Long.valueOf(v._1()) * Long.valueOf(v._2()) * Long.valueOf(v._3());
+                    System.out.println(String.format("Answer to part2: %d", multipliedTriple));
+                });
     }
 }

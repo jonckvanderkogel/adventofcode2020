@@ -5,34 +5,32 @@ import io.vavr.collection.List;
 import org.bullet.util.FileProcessing;
 
 import java.util.Comparator;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PartitioningFileProcessor {
     public static void main(String... args) {
-        int max = FileProcessing.streamLinesFromFile("inputDay5.txt")
+        FileProcessing.streamLinesFromFile("inputDay5.txt")
                 .map(Partitioning::determineSeatNumber)
+                .flatMap(Optional::stream)
                 .mapToInt(i -> i)
                 .max()
-                .orElseThrow(NoSuchElementException::new);
-
-        System.out.println(String.format("Max seat number: %d", max));
+                .ifPresent(i -> System.out.println(String.format("Max seat number: %d", i)));
 
 
         // the minimum element is 49, max 806
-        int yourSeatNumber = List
+        List
                 .ofAll(IntStream.rangeClosed(49, 806).boxed())
                 .zip(FileProcessing.streamLinesFromFile("inputDay5.txt")
                         .map(Partitioning::determineSeatNumber)
+                        .flatMap(Optional::stream)
                         .sorted()
                         .collect(Collectors.toList())
                 )
                 .takeWhile(tuple -> tuple._1().equals(tuple._2()))
                 .maxBy(Comparator.comparingInt(Tuple2::_1))
-                .getOrElseThrow(NoSuchElementException::new)
-                ._1() + 1;
-
-        System.out.println(String.format("Your seat number: %d", yourSeatNumber));
+                .map(t -> t._1() + 1)
+                .peek(s -> System.out.println(String.format("Your seat number: %d", s)));
     }
 }

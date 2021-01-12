@@ -22,6 +22,8 @@ public class XmasProcessorTest {
         Tuple2<Integer,Integer> range = processor.findRange(numbers, 127L);
         assertEquals(new Tuple2<>(2,5), range);
 
-        assertEquals(62, processor.addSmallestAndLargest(numbers, range));
+        processor
+                .addSmallestAndLargest(numbers, range)
+                .ifPresent(v -> assertEquals(62L, v));
     }
 }

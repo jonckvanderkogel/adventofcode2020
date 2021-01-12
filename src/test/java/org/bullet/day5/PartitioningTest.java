@@ -12,8 +12,13 @@ public class PartitioningTest {
         FFFBBBFRRR: row 14, column 7, seat ID 119.
         BBFFBBFRLL: row 102, column 4, seat ID 820.
          */
-        assertEquals(567, Partitioning.determineSeatNumber("BFFFBBFRRR"));
-        assertEquals(119, Partitioning.determineSeatNumber("FFFBBBFRRR"));
-        assertEquals(820, Partitioning.determineSeatNumber("BBFFBBFRLL"));
+        Partitioning.determineSeatNumber("BFFFBBFRRR")
+                .ifPresent(s -> assertEquals(567, s));
+
+        Partitioning.determineSeatNumber("FFFBBBFRRR")
+                .ifPresent(s -> assertEquals(119, s));
+
+        Partitioning.determineSeatNumber("BBFFBBFRLL")
+                .ifPresent(s -> assertEquals(820, s));
     }
 }

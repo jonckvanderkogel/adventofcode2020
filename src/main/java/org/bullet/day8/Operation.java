@@ -9,7 +9,7 @@ public enum Operation {
     }),
     JMP(GameConsole::mutateInstructionPosition),
     NOP((g,p) -> g.mutateInstructionPosition(1)),
-    INVALID((g,p) -> {throw new RuntimeException("Cannot run invalid instruction");});
+    INVALID((g,p) -> System.out.println(String.format("Cannot run invalid instruction: %s, %s", g, p)));
 
     private BiConsumer<GameConsole,Integer> execute;
 

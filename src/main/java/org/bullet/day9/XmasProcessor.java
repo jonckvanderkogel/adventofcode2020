@@ -4,6 +4,7 @@ import io.vavr.Tuple2;
 import org.bullet.util.TailCall;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static org.bullet.util.TailCalls.done;
@@ -22,35 +23,43 @@ public class XmasProcessor {
         return numbers.get(result._1());
     }
 
-
     private Boolean isPositionValid(List<Long> numbers, Integer index, Integer preambleSize) {
         List<Long> subList = numbers.subList(index - preambleSize, index);
         Long toCheck = numbers.get(index);
-        for (int i=0; i<preambleSize-1; i++) {
-            for (int j=i+1; j<preambleSize; j++) {
-                if (toCheck.equals(subList.get(i) + subList.get(j))) {
-                    return true;
-                }
-            }
-        }
 
-        return false;
+        return IntStream
+                .range(0, preambleSize - 1)
+                .boxed()
+                .flatMap(i -> IntStream.range(i, preambleSize)
+                        .boxed()
+                        .map(j -> toCheck.equals(subList.get(i) + subList.get(j)))
+                )
+                .filter(v -> v)
+                .findFirst()
+                .orElseGet(() -> false);
     }
 
-    public Long addSmallestAndLargest(List<Long> numbers, Tuple2<Integer,Integer> range) {
-        Long min = IntStream
+    public Optional<Long> addSmallestAndLargest(List<Long> numbers, Tuple2<Integer,Integer> range) {
+        Optional<Long> min = IntStream
                 .rangeClosed(range._1(), range._2())
                 .mapToLong(i -> numbers.get(i))
                 .min()
-                .getAsLong();
+                .stream()
+                .boxed()
+                .findFirst();
 
-        Long max = IntStream
+        Optional<Long> max = IntStream
                 .rangeClosed(range._1(), range._2())
                 .mapToLong(i -> numbers.get(i))
                 .max()
-                .getAsLong();
+                .stream()
+                .boxed()
+                .findFirst();
 
-        return min + max;
+        return min
+                .flatMap(mi -> max
+                        .map(ma -> mi + ma)
+                );
     }
 
     public Tuple2<Integer,Integer> findRange(List<Long> numbers, Long targetValue) {

@@ -3,14 +3,13 @@ package org.bullet.day6;
 import org.bullet.util.FileProcessing;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeclarationFormCounterTest {
     @Test
-    public void shouldBeAbleToCountAnswersWhereAPersonInTheGroupAnsweredYes() throws IOException {
+    public void shouldBeAbleToCountAnswersWhereAPersonInTheGroupAnsweredYes() {
         List<String> lines = FileProcessing.parseLinesFromFile("testFileDay6Part1.txt");
         List<List<String>> combinedLines = FileProcessing.combineLines(lines);
 
@@ -18,7 +17,7 @@ public class DeclarationFormCounterTest {
     }
 
     @Test
-    public void shouldBeAbleToCountAnswersWhereEveryPersonInTheGroupAnsweredYes() throws IOException {
+    public void shouldBeAbleToCountAnswersWhereEveryPersonInTheGroupAnsweredYes() {
         List<String> lines = FileProcessing.parseLinesFromFile("testFileDay6Part1.txt");
         List<List<String>> combinedLines = FileProcessing.combineLines(lines);
 

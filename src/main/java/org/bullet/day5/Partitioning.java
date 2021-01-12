@@ -3,25 +3,27 @@ package org.bullet.day5;
 import org.bullet.util.Range;
 import org.bullet.util.TailCall;
 
+import java.util.Optional;
+
 import static org.bullet.util.TailCalls.done;
 
 public class Partitioning {
-    public static int determineSeatNumber(String partitioningString) {
+    public static Optional<Integer> determineSeatNumber(String partitioningString) {
         String rowEncoding = partitioningString.substring(0,7);
         String columnEncoding = partitioningString.substring(7);
 
-        Integer row = processEncodedPartitioningString(rowEncoding, new Range(0, 127)).invoke();
-        Integer column = processEncodedPartitioningString(columnEncoding, new Range(0, 7)).invoke();
+        Optional<Integer> row = processEncodedPartitioningString(rowEncoding, new Range(0, 127)).invoke();
+        Optional<Integer> column = processEncodedPartitioningString(columnEncoding, new Range(0, 7)).invoke();
 
-        return row * 8 + column;
+        return row
+                .flatMap(r -> column
+                        .map(c -> r * 8 + c)
+                );
     }
 
-    public static TailCall<Integer> processEncodedPartitioningString(final String encodedPartitioning, final Range range) {
+    public static TailCall<Optional<Integer>> processEncodedPartitioningString(final String encodedPartitioning, final Range range) {
         if (range.getLowerBound() == range.getUpperBound() || encodedPartitioning.length() == 0) {
-            if (range.getLowerBound() != range.getUpperBound()) {
-                throw new RuntimeException("Something went wrong wince we no longer have encoded instructions but upperbound is not equal to lowerbound");
-            }
-            return done(range.getLowerBound());
+            return done(Optional.of(range.getLowerBound()));
         } else {
             Section section = Section.parseSection(encodedPartitioning.substring(0, 1));
             String tail = encodedPartitioning.substring(1);
@@ -29,7 +31,7 @@ public class Partitioning {
             return switch(section) {
                 case FRONT, LEFT -> () -> processEncodedPartitioningString(tail, keepLowerHalf(range));
                 case BACK, RIGHT -> () -> processEncodedPartitioningString(tail, keepUpperHalf(range));
-                case INVALID -> throw new RuntimeException("Invalid instruction");
+                case INVALID -> done(Optional.empty());
             };
         }
     }

@@ -6,22 +6,19 @@ import org.bullet.util.FileProcessing;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class BagFileParser {
-    private static Pattern KEY_PATTERN = Pattern.compile("([a-z]* [a-z]*)(?: bags)");
-    private static Pattern CAPACITY_PATTERN = Pattern.compile("([0-9]*) ([a-z]* [a-z]*)");
-
-    public static void main(String... args) {
-        BagFileParser bagFileParser = new BagFileParser();
-        bagFileParser.buildCapacityMap("inputDay7.txt");
-    }
+    private final static Pattern KEY_PATTERN = Pattern.compile("([a-z]* [a-z]*)(?: bags)");
+    private final static Pattern CAPACITY_PATTERN = Pattern.compile("([0-9]*) ([a-z]* [a-z]*)");
 
     public Map<String, List<Capacity>> buildCapacityMap(String fileName) {
         return FileProcessing.streamLinesFromFile(fileName)
                 .map(this::parseLine)
+                .flatMap(Optional::stream)
                 .collect(Collectors.toMap(
                         Tuple2::_1, Tuple2::_2
                 ));
@@ -38,7 +35,7 @@ public class BagFileParser {
                 .collect(Collectors.groupingBy(Tuple2::_1, Collectors.mapping(Tuple2::_2, Collectors.toList())));
     }
 
-    private Tuple2<String, List<Capacity>> parseLine(String line) {
+    private Optional<Tuple2<String, List<Capacity>>> parseLine(String line) {
         String[] bags = line.split(" contain ");
         Matcher keyMatcher = KEY_PATTERN.matcher(bags[0]);
         Matcher capacityMatcher = CAPACITY_PATTERN.matcher(bags[1]);
@@ -51,9 +48,9 @@ public class BagFileParser {
                     capacityList.add(capacity);
                 }
             }
-            return new Tuple2<>(keyColor, capacityList);
+            return Optional.of(new Tuple2<>(keyColor, capacityList));
         } else {
-            throw new RuntimeException(String.format("Invalid line: %s", line));
+            return Optional.empty();
         }
     }
 }

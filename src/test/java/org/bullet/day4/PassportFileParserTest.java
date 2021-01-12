@@ -2,14 +2,13 @@ package org.bullet.day4;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PassportFileParserTest {
     @Test
-    public void passportFileParserShouldBeAbleToParseTextFile() throws IOException {
+    public void passportFileParserShouldBeAbleToParseTextFile() {
         var passportData = PassportFileParser.parseFile("testFileDay4Part1.txt");
 
         var passports = passportData

@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InstructionFileParser {
-    private static Pattern INSTRUCTION_PATTERN = Pattern.compile("(acc|nop|jmp) ([+\\-][0-9]+)");
+    private final static Pattern INSTRUCTION_PATTERN = Pattern.compile("(acc|nop|jmp) ([+\\-][0-9]+)");
 
     public List<Instruction> parseInstructions(String fileName) {
         return FileProcessing

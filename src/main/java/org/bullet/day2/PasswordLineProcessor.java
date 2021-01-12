@@ -1,5 +1,6 @@
 package org.bullet.day2;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,12 +11,12 @@ public interface PasswordLineProcessor {
 
     boolean isValid(String passwordLine);
 
-    default LineItem parseLine(String passwordLine) {
+    default Optional<LineItem> parseLine(String passwordLine) {
         Matcher m = pattern.matcher(passwordLine);
         if (m.find()) {
-            return new LineItem(parseInt(m.group(1)), parseInt(m.group(2)), m.group(3), m.group(4));
+            return Optional.of(new LineItem(parseInt(m.group(1)), parseInt(m.group(2)), m.group(3), m.group(4)));
         } else {
-            throw new RuntimeException("Invalid password line");
+            return Optional.empty();
         }
     }
 }
